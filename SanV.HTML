@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffcccb;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #ff1493;
+            font-size: 3em;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .heart {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 75%, 15% 100%, 0% 35%);
+            animation: float 2s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+        .btn {
+            background-color: #ff69b4;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .message {
+            font-size: 1.8em;
+            color: #d00000;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="valentine-question">
+        <h1>¿Quieres ser mi Valentín? 💖</h1>
+        <button class="btn" onclick="acceptValentine()">SI</button>
+        <button class="btn" onclick="askAgain()">NO :(</button>
+    </div>
+    
+    <div class="container" id="valentine-surprise" style="display: none;">
+        <h1>¡Feliz San Valentín, mi amor! ❤️</h1>
+        <div class="heart" style="top: 20%; left: 30%;"></div>
+        <div class="heart" style="top: 40%; left: 60%;"></div>
+        <div class="heart" style="top: 70%; left: 20%;"></div>
+        <button class="btn" onclick="showMessage('loveMessage')">Presiona para una sorpresa</button>
+        <p class="message" id="loveMessage">Eres lo mejor que me ha pasado, te amo con todo mi corazón 💖</p>
+        
+        <button class="btn" onclick="showMessage('message2')">Haz clic aquí, Monse</button>
+        <p class="message" id="message2">Eres la persona más especial en mi vida, Monse ❤️</p>
+        
+        <button class="btn" onclick="showMessage('message3')">Descubre otro mensaje</button>
+        <p class="message" id="message3">Cada día a tu lado es un regalo que valoro con todo mi ser 💕</p>
+        
+        <button class="btn" onclick="showMessage('message4')">Una sorpresa más</button>
+        <p class="message" id="message4">Te amo más de lo que las palabras pueden expresar, Monse 😘</p>
+       <button class="btn" onclick="showMessage('message5')">Una sorpresa más</button>
+        <p class="message" id="message5">Eres el love of my life 😘</p>
+    </div>
+    
+    <script>
+        const questions = [
+            "¿Segura que no quieres ser mi Valentín? 😢",
+            "Piénsalo bien... ¿quieres ser mi Valentín? 🥺",
+            "¡Dame una oportunidad! ¿Sí? 💘",
+            "Voy a seguir preguntando... ¿Aceptas ahora? 💕"
+        ];
+        let questionIndex = 0;
+        
+        function acceptValentine() {
+            document.getElementById('valentine-question').style.display = 'none';
+            document.getElementById('valentine-surprise').style.display = 'block';
+            createHearts();
+        }
+        
+        function askAgain() {
+            if (questionIndex < questions.length) {
+                document.querySelector('#valentine-question h1').innerText = questions[questionIndex];
+                questionIndex++;
+            } else {
+                acceptValentine();
+            }
+        }
+        
+        function showMessage(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+        
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.top = Math.random() * 100 + "%";
+                heart.style.left = Math.random() * 100 + "%";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
